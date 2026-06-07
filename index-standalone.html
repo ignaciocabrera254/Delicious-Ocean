@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicious Ocean - Pescadería y Marisquería en Pirque</title>
+    
+    <!-- SEO Local: Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SeafoodStore",
+      "name": "Delicious Ocean",
+      "image": "https://images.unsplash.com/photo-1614705574384-5a3962b1a511?auto=format&fit=crop&w=1200",
+      "@id": "https://deliciousocean.cl",
+      "url": "https://deliciousocean.cl",
+      "telephone": "+56923951003",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Virginia Subercaseaux 447, Local 6",
+        "addressLocality": "Pirque",
+        "addressRegion": "Región Metropolitana",
+        "addressCountry": "CL",
+        "postalCode": "1450000"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -33.6333,
+        "longitude": -70.5500
+      },
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "09:00", "closes": "18:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Sunday"], "opens": "09:00", "closes": "14:00" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Realizan despachos a domicilio?", "acceptedAnswer": { "@type": "Answer", "text": "Actualmente nos enfocamos en el retiro en local y pedidos programados vía WhatsApp." } },
+        { "@type": "Question", "name": "¿Cómo garantizan la frescura de sus productos?", "acceptedAnswer": { "@type": "Answer", "text": "Seleccionamos personalmente cada producto en el terminal pesquero todas las madrugadas." } }
+      ]
+    }
+    </script>
+
+    <!-- Tailwind CSS vía CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React & ReactDOM vía CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel para compilar JSX en el navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Configuración de Tailwind -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { brand: { primary: '#003366', accent: '#FE764C', tertiary: '#00509E' } },
+            fontFamily: { epilogue: ['Epilogue', 'sans-serif'], manrope: ['Manrope', 'sans-serif'] },
+            boxShadow: { oceanic: '0px 4px 20px rgba(0, 51, 102, 0.08)', 'oceanic-hover': '0px 12px 32px rgba(0, 51, 102, 0.12)' }
+          }
+        }
+      }
+    </script>
+    <style>
+        body { font-family: 'Manrope', sans-serif; background-color: #FAFAFA; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Epilogue', sans-serif; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Mock Data
+        const telephone = "+56923951003";
+        const products = [
+            { id: 1, title: "Reineta", description: "Selección del día, frescura garantizada del mar a tu mesa.", price: "$10.990", unit: "/Kg", image: "/reineta.png", alt: "Reineta fresca" },
+            { id: 2, title: "Camarones Ecuatorianos", description: "Calibre grande, textura firme y sabor dulce.", price: "$12.500", unit: "/Kg", image: "/camarones.png", alt: "Camarones ecuatorianos" }
+        ];
+        const faqs = [
+            { question: "¿Realizan despachos a domicilio?", answer: "Actualmente nos enfocamos en el retiro en local y pedidos programados vía WhatsApp." },
+            { question: "¿Cómo garantizan la frescura de sus productos?", answer: "Seleccionamos personalmente cada producto en el terminal pesquero todas las madrugadas." }
+        ];
+
+        function App() {
+            const [openFAQ, setOpenFAQ] = React.useState(0);
+
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <header className="bg-white shadow-sm sticky top-0 z-50 p-4">
+                        <div className="max-w-7xl mx-auto flex justify-between items-center">
+                            <h1 className="text-2xl font-bold text-brand-primary">Delicious Ocean</h1>
+                            <a href={`https://wa.me/${telephone}`} className="bg-brand-accent text-white px-6 py-2 rounded-full font-bold">Pedir WhatsApp</a>
+                        </div>
+                    </header>
+
+                    <main>
+                        <section className="bg-brand-primary py-24 md:py-32 text-center text-white relative overflow-hidden">
+                            <div className="absolute inset-0 z-0">
+                                <img src="https://images.unsplash.com/photo-1614705574384-5a3962b1a511?auto=format&fit=crop&w=2000&q=80" alt="Mariscos" className="w-full h-full object-cover" />
+                                <div className="absolute inset-0 bg-[#001e40]/70 mix-blend-multiply"></div>
+                            </div>
+                            <div className="relative z-10 max-w-4xl mx-auto px-4">
+                                <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">Pescados y Mariscos Frescos en <span className="text-brand-accent">Pirque</span></h1>
+                                <p className="text-xl mb-8 font-medium max-w-2xl mx-auto">Productos del mar de primera selección. Máxima calidad y precios que cuidan tu bolsillo, con stock renovado todos los días.</p>
+                                <a href={`https://wa.me/${telephone}`} className="inline-block bg-brand-accent text-white px-8 py-3 rounded-full font-bold text-lg hover:opacity-90 shadow-lg">Pedir ahora por WhatsApp</a>
+                            </div>
+                        </section>
+
+                        <section className="py-16 max-w-7xl mx-auto px-4">
+                            <h2 className="text-3xl text-brand-primary text-center mb-10 font-bold">Nuestra Selección</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                {products.map(p => (
+                                    <article key={p.id} className="bg-white rounded-2xl shadow-oceanic overflow-hidden">
+                                        <img src={p.image} alt={p.alt} className="w-full h-48 object-cover" />
+                                        <div className="p-6">
+                                            <h3 className="text-xl text-brand-primary font-bold mb-2">{p.title}</h3>
+                                            <p className="text-gray-600 mb-4">{p.description}</p>
+                                            <p className="text-2xl font-bold">{p.price} <span className="text-sm font-normal text-gray-500">{p.unit}</span></p>
+                                        </div>
+                                    </article>
+                                ))}
+                            </div>
+                        </section>
+
+                        <section className="py-16 bg-white">
+                            <div className="max-w-3xl mx-auto px-4">
+                                <h2 className="text-3xl text-brand-primary text-center mb-10 font-bold">Preguntas Frecuentes</h2>
+                                <div className="space-y-4">
+                                    {faqs.map((faq, idx) => (
+                                        <article key={idx} className="border border-gray-100 rounded-xl rounded overflow-hidden shadow-sm">
+                                            <button 
+                                                className="w-full text-left p-4 font-bold text-gray-800 bg-gray-50 flex justify-between"
+                                                onClick={() => setOpenFAQ(openFAQ === idx ? null : idx)}
+                                            >
+                                                {faq.question}
+                                                <span>{openFAQ === idx ? '-' : '+'}</span>
+                                            </button>
+                                            {openFAQ === idx && <div className="p-4 text-gray-600 bg-white">{faq.answer}</div>}
+                                        </article>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+
+                    <footer className="bg-brand-primary text-white py-10 text-center">
+                        <p>&copy; 2026 Delicious Ocean Pirque</p>
+                    </footer>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
